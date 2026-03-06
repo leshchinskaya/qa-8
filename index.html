@@ -4,6 +4,14 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Kto ty iz devochek QA-otdela? • K 8 Marta</title>
+  <meta property="og:title" content="Кто ты из девочек QA-отдела? 💐" />
+  <meta property="og:description" content="Специальный квиз к 8 Марта: выбери ответы и узнай, на кого из команды ты похож(а) 💕" />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://leshchinskaya.github.io/qa-8/" />
+  <meta property="og:image" content="https://leshchinskaya.github.io/qa-8/qirls/og-preview.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Кто ты из девочек QA-отдела? 💐" />
+  <meta name="twitter:description" content="Специальный квиз к 8 Марта: выбери ответы и узнай, на кого из команды ты похож(а) 💕" />
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0%25' stop-color='%23ff77c8'/%3E%3Cstop offset='100%25' stop-color='%23e4b5ff'/%3E%3C/linearGradient%3E%3C/defs%3E%3Ccircle cx='32' cy='32' r='30' fill='url(%23g)'/%3E%3Ctext x='32' y='44' text-anchor='middle' font-size='32' font-family='sans-serif' font-weight='700' fill='white'%3EQA%3C/text%3E%3C/svg%3E" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -266,8 +274,8 @@
     .subtitle {
       margin-top: 8px;
       font-size: clamp(0.96rem, 2.6vw, 1.2rem);
-      color: #fff8ff;
-      text-shadow: 0 1px 8px rgba(136, 47, 111, 0.65);
+      color: #5c1a4a;
+      text-shadow: 0 1px 4px rgba(255, 255, 255, 0.6);
     }
 
     .title-sparkle {
@@ -580,6 +588,90 @@
       cursor: pointer;
     }
 
+    /* Answer click ripple */
+    .answer-btn.chosen {
+      animation: answerPop 360ms ease forwards;
+      pointer-events: none;
+    }
+    .answer-btn.dimmed {
+      opacity: 0.4;
+      transform: scale(0.97);
+      pointer-events: none;
+      transition: opacity 200ms ease, transform 200ms ease;
+    }
+    @keyframes answerPop {
+      0%   { transform: scale(1); filter: brightness(1); }
+      40%  { transform: scale(1.06); filter: brightness(1.25); box-shadow: 0 0 24px rgba(255,119,200,0.7); }
+      100% { transform: scale(1); filter: brightness(1); }
+    }
+
+    /* Start screen */
+    .start-screen {
+      text-align: center;
+      display: grid;
+      gap: 20px;
+      justify-items: center;
+      animation: popIn 400ms ease;
+    }
+    .start-emoji {
+      font-size: clamp(48px, 10vw, 72px);
+      animation: titlePulse 2.6s ease-in-out infinite;
+    }
+    .start-heading {
+      font-size: clamp(1.2rem, 3.5vw, 1.6rem);
+      color: #7e2a65;
+      line-height: 1.45;
+    }
+    .start-btn {
+      appearance: none;
+      border: 0;
+      cursor: pointer;
+      font: inherit;
+      border-radius: 999px;
+      color: #ffffff;
+      padding: 16px 36px;
+      font-size: clamp(1.1rem, 3vw, 1.35rem);
+      font-weight: 600;
+      transition: transform var(--ease), box-shadow var(--ease), filter var(--ease);
+      background:
+        linear-gradient(180deg, rgba(255,255,255,0.5), rgba(255,255,255,0) 42%),
+        linear-gradient(135deg, var(--pink-1), var(--pink-4) 45%, #cd7cff 100%);
+      box-shadow: var(--shadow-btn), inset 0 1px 2px rgba(255,255,255,0.55);
+      text-shadow: 0 1px 2px rgba(112,31,92,0.4);
+      position: relative;
+      overflow: hidden;
+    }
+    .start-btn:hover {
+      transform: translateY(-3px) scale(1.03);
+      box-shadow: 0 10px 22px rgba(255,77,184,0.4);
+      filter: saturate(1.1);
+    }
+    .start-btn:active {
+      transform: translateY(0) scale(0.97);
+    }
+
+    /* Back button */
+    .back-btn {
+      appearance: none;
+      border: 0;
+      cursor: pointer;
+      font: inherit;
+      font-size: 0.9rem;
+      color: #b4398f;
+      background: rgba(255,255,255,0.55);
+      border-radius: 999px;
+      padding: 7px 16px;
+      margin-top: 18px;
+      transition: transform var(--ease), background var(--ease);
+    }
+    .back-btn:hover {
+      background: rgba(255,255,255,0.8);
+      transform: translateY(-1px);
+    }
+    .back-btn:active {
+      transform: translateY(0) scale(0.97);
+    }
+
     /* Secret gallery modal */
     .secret-overlay {
       display: none;
@@ -674,7 +766,7 @@
       <span class="title-sparkle s3">✨</span>
       <span class="title-sparkle s4">💫</span>
       <h1 class="title">Kto ty iz devochek QA-otdela? 💐</h1>
-      <p class="subtitle">Специальный квиз к 8 Марта: выбери ответы и узнай, на кого из команды ты похож(а) 💕</p>
+      <p class="subtitle" id="subtitleQuote">«За каждым стабильным релизом стоит женщина, которая всё перепроверила» 💕</p>
     </header>
 
     <section class="quiz-card">
@@ -924,13 +1016,103 @@
     ];
 
     /* =========================
+       QUOTES
+    ========================= */
+    const quotes = [
+      "«Будущее принадлежит тем, кто верит в красоту своей мечты» — Элеонора Рузвельт",
+      "«Женщина — это чай. Не знаешь, насколько она сильна, пока не окажется в горячей воде» — Нэнси Рейган",
+      "«Самая сильная сила в мире — женщина, которая решила действовать»",
+      "«Мы не принцессы, которых нужно спасать — мы королевы, которые спасают релизы»",
+      "«За каждым великим продуктом стоит женщина, которая всё перепроверила»",
+      "«Весна начинается с нас — с тех, кто несёт тепло и красоту в мир»",
+      "«Женщина может всё. Особенно если дедлайн завтра»",
+      "«С 8 Марта! Пусть багов будет меньше, а цветов — больше»",
+      "«Девочки QA — суперсила, которую нельзя заменить автотестами»",
+      "«Нежные снаружи, стальные внутри — вот такие мы, тестировщицы»",
+      "«8 Марта — день, когда мир наконец говорит то, что стоило говорить каждый день»",
+      "«Красота спасёт мир, а QA-девочки — продакшен»",
+      "«Женщины вдохновляют мужчин на великие дела, а потом тестируют результат»",
+      "«Ничто так не украшает команду, как сильные женщины в ней»",
+      "«Девушки правят миром — и тестовыми окружениями тоже»",
+    ];
+    let lastQuoteIndex = -1;
+
+    function getRandomQuote() {
+      let idx;
+      do {
+        idx = Math.floor(Math.random() * quotes.length);
+      } while (idx === lastQuoteIndex && quotes.length > 1);
+      lastQuoteIndex = idx;
+      return quotes[idx];
+    }
+
+    /* =========================
        QUIZ ENGINE
     ========================= */
     let currentQuestion = 0;
+    let shuffledQuestions = [];
+    const answerHistory = [];
     const appState = {
       winnerKey: null,
       winnerGirl: null
     };
+
+    /* --- Shuffle helper --- */
+    function shuffleArray(arr) {
+      const a = [...arr];
+      for (let i = a.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [a[i], a[j]] = [a[j], a[i]];
+      }
+      return a;
+    }
+
+    /* --- Sound effects via Web Audio API --- */
+    let audioCtx = null;
+    let soundEnabled = true;
+    function getAudioCtx() {
+      if (!audioCtx) {
+        try { audioCtx = new (window.AudioContext || window.webkitAudioContext)(); } catch(e) { soundEnabled = false; }
+      }
+      return audioCtx;
+    }
+
+    function playPop() {
+      if (!soundEnabled) return;
+      const ctx = getAudioCtx();
+      if (!ctx) return;
+      const osc = ctx.createOscillator();
+      const gain = ctx.createGain();
+      osc.connect(gain);
+      gain.connect(ctx.destination);
+      osc.type = "sine";
+      osc.frequency.setValueAtTime(880, ctx.currentTime);
+      osc.frequency.exponentialRampToValueAtTime(440, ctx.currentTime + 0.08);
+      gain.gain.setValueAtTime(0.15, ctx.currentTime);
+      gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.12);
+      osc.start(ctx.currentTime);
+      osc.stop(ctx.currentTime + 0.12);
+    }
+
+    function playFanfare() {
+      if (!soundEnabled) return;
+      const ctx = getAudioCtx();
+      if (!ctx) return;
+      const notes = [523, 659, 784, 1047];
+      notes.forEach((freq, i) => {
+        const osc = ctx.createOscillator();
+        const gain = ctx.createGain();
+        osc.connect(gain);
+        gain.connect(ctx.destination);
+        osc.type = "triangle";
+        const t = ctx.currentTime + i * 0.12;
+        osc.frequency.setValueAtTime(freq, t);
+        gain.gain.setValueAtTime(0.13, t);
+        gain.gain.exponentialRampToValueAtTime(0.001, t + 0.3);
+        osc.start(t);
+        osc.stop(t + 0.3);
+      });
+    }
 
     function resetScores() {
       Object.keys(groups).forEach((key) => {
@@ -938,19 +1120,43 @@
       });
     }
 
-    function selectAnswer(groupKey) {
+    function goBack() {
+      if (currentQuestion <= 0) return;
+      const prevGroup = answerHistory.pop();
+      if (prevGroup && groups[prevGroup]) {
+        groups[prevGroup].score -= 1;
+      }
+      currentQuestion -= 1;
+      renderQuestion(true);
+    }
+
+    function selectAnswer(groupKey, btnEl) {
       if (!groups[groupKey]) return;
+      answerHistory.push(groupKey);
       groups[groupKey].score += 1;
       currentQuestion += 1;
 
-      if (currentQuestion >= questions.length) {
-        computeResult();
-        renderResult();
-        launchConfetti();
-        return;
+      playPop();
+
+      /* Animate chosen button */
+      if (btnEl) {
+        btnEl.classList.add("chosen");
+        btnEl.closest(".answers").querySelectorAll(".answer-btn").forEach(b => {
+          if (b !== btnEl) b.classList.add("dimmed");
+        });
       }
 
-      renderQuestion(true);
+      const delay = btnEl ? 380 : 0;
+      setTimeout(() => {
+        if (currentQuestion >= shuffledQuestions.length) {
+          computeResult();
+          renderResult();
+          launchConfetti();
+          playFanfare();
+          return;
+        }
+        renderQuestion(true);
+      }, delay);
     }
 
     function computeResult() {
@@ -963,12 +1169,29 @@
       appState.winnerGirl = randomGirl;
     }
 
-    function restartQuiz() {
+    function renderStartScreen() {
       currentQuestion = 0;
+      answerHistory.length = 0;
       appState.winnerKey = null;
       appState.winnerGirl = null;
       resetScores();
-      renderQuestion();
+
+      cardContent.innerHTML = `
+        <div class="start-screen">
+          <div class="start-emoji">💐</div>
+          <h2 class="start-heading">Ответь на 10 вопросов и узнай,<br>на кого из девочек QA-отдела ты похож(а)!</h2>
+          <button class="start-btn" id="startBtn">Начать квиз ✨</button>
+        </div>
+      `;
+      document.getElementById("startBtn").addEventListener("click", () => {
+        shuffledQuestions = shuffleArray(questions);
+        playPop();
+        renderQuestion(true);
+      });
+    }
+
+    function restartQuiz() {
+      renderStartScreen();
     }
 
     /* =========================
@@ -981,7 +1204,7 @@
     const cursorLayer = document.getElementById("cursorLayer");
     const cursorWand = document.getElementById("cursorWand");
     const confettiLayer = document.getElementById("confettiLayer");
-    const SHARE_URL = "https://google.com";
+    const SHARE_URL = "https://leshchinskaya.github.io/qa-8/";
 
     function getShareText() {
       const winnerGroup = groups[appState.winnerKey];
@@ -1255,33 +1478,40 @@
     }
 
     function renderQuestion(withTransition = false) {
-      const q = questions[currentQuestion];
+      const q = shuffledQuestions[currentQuestion];
       if (!q) return;
 
       const doRender = () => {
-        const progress = Math.round((currentQuestion / questions.length) * 100);
+        const subtitleEl = document.getElementById("subtitleQuote");
+        if (subtitleEl) subtitleEl.textContent = `${getRandomQuote()} 💕`;
+        const progress = Math.round(((currentQuestion + 1) / shuffledQuestions.length) * 100);
+        const shuffledAnswers = shuffleArray(q.answers);
         cardContent.innerHTML = `
           <div class="progress">
-            <span class="progress-label">Вопрос ${currentQuestion + 1} / ${questions.length}</span>
+            <span class="progress-label">Вопрос ${currentQuestion + 1} / ${shuffledQuestions.length}</span>
             <div class="bar"><div class="bar-fill" style="width:${progress}%"></div></div>
           </div>
           <h2 class="question">${q.text}</h2>
           <div class="answers">
-            ${q.answers.map((answer) => `
+            ${shuffledAnswers.map((answer) => `
               <button class="answer-btn" data-group="${answer.group}">
                 ${answer.text}
               </button>
             `).join("")}
           </div>
+          ${currentQuestion > 0 ? '<button class="back-btn" id="backBtn">← Назад</button>' : ''}
         `;
 
         const answerButtons = cardContent.querySelectorAll(".answer-btn");
         answerButtons.forEach((btn) => {
           btn.addEventListener("click", () => {
             const { group } = btn.dataset;
-            selectAnswer(group);
+            selectAnswer(group, btn);
           });
         });
+
+        const backBtn = document.getElementById("backBtn");
+        if (backBtn) backBtn.addEventListener("click", goBack);
       };
 
       if (withTransition) {
@@ -1301,6 +1531,8 @@
       if (!winnerGroup || !winnerGirl) return;
 
       cardContent.classList.add("fade-out");
+      const subtitleEl = document.getElementById("subtitleQuote");
+      if (subtitleEl) subtitleEl.textContent = `${getRandomQuote()} 💕`;
       setTimeout(() => {
         cardContent.innerHTML = `
           <div class="result-wrap">
@@ -1449,10 +1681,29 @@
       }
     }
 
+    /* --- Background effects with visibility pause --- */
+    let bgIntervals = [];
+
+    function startBackgroundEffects() {
+      if (bgIntervals.length) return;
+      bgIntervals.push(
+        setInterval(createFloatingHeart, 550),
+        setInterval(createSparkle, 420),
+        setInterval(createFlyingSticker, 1350)
+      );
+    }
+
+    function stopBackgroundEffects() {
+      bgIntervals.forEach(clearInterval);
+      bgIntervals = [];
+    }
+
     function initBackgroundEffects() {
-      setInterval(createFloatingHeart, 550);
-      setInterval(createSparkle, 420);
-      setInterval(createFlyingSticker, 1350);
+      startBackgroundEffects();
+      document.addEventListener("visibilitychange", () => {
+        if (document.hidden) stopBackgroundEffects();
+        else startBackgroundEffects();
+      });
     }
 
     /* Secret gallery */
@@ -1469,7 +1720,7 @@
         for (const girl of g.girls) {
           html += `
             <div class="secret-card">
-              <img src="${girl.img}" alt="${girl.name}" onerror="this.style.display='none'" />
+              <img src="${girl.img}" alt="${girl.name}" class="sc-img" />
               <div class="sc-name">${girl.name}</div>
               <div class="sc-vibe">${girl.galleryDesc || girl.vibe}</div>
             </div>`;
@@ -1477,12 +1728,15 @@
       }
       overlay.innerHTML = html;
       overlay.classList.add("visible");
+      overlay.querySelectorAll(".sc-img").forEach(img => {
+        img.addEventListener("error", () => { img.style.display = "none"; });
+      });
       document.getElementById("secretClose").addEventListener("click", () => {
         overlay.classList.remove("visible");
       });
     });
 
-    restartQuiz();
+    renderStartScreen();
     initBackgroundEffects();
     initGlitterCursor();
   </script>
