@@ -1,0 +1,1490 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Kto ty iz devochek QA-otdela? • K 8 Marta</title>
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0%25' stop-color='%23ff77c8'/%3E%3Cstop offset='100%25' stop-color='%23e4b5ff'/%3E%3C/linearGradient%3E%3C/defs%3E%3Ccircle cx='32' cy='32' r='30' fill='url(%23g)'/%3E%3Ctext x='32' y='44' text-anchor='middle' font-size='32' font-family='sans-serif' font-weight='700' fill='white'%3EQA%3C/text%3E%3C/svg%3E" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --pink-1: #ff77c8;
+      --pink-2: #ffb3e6;
+      --pink-3: #ffd6f5;
+      --purple-1: #e4b5ff;
+      --pink-4: #ff4db8;
+      --white: #ffffff;
+      --text: #6a1b54;
+      --card-bg: rgba(255, 255, 255, 0.86);
+      --shadow-soft: 0 14px 35px rgba(255, 77, 184, 0.25);
+      --shadow-btn: 0 6px 18px rgba(228, 181, 255, 0.55);
+      --glow: 0 0 0 3px rgba(255, 179, 230, 0.5), 0 0 28px rgba(255, 119, 200, 0.55);
+      --radius-lg: 28px;
+      --radius-md: 18px;
+      --ease: 220ms ease;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html,
+    body {
+      min-height: 100%;
+      font-family: "Fredoka", "Bubblegum Sans", cursive;
+      color: var(--text);
+      overflow-x: hidden;
+    }
+
+    body {
+      display: grid;
+      place-items: center;
+      padding: 24px;
+      background:
+        radial-gradient(circle at 15% 15%, rgba(255, 214, 245, 0.95), transparent 38%),
+        radial-gradient(circle at 85% 20%, rgba(228, 181, 255, 0.88), transparent 30%),
+        radial-gradient(circle at 50% 90%, rgba(255, 119, 200, 0.45), transparent 35%),
+        linear-gradient(145deg, #ffc7ec 0%, #f4ceff 48%, #f8dbff 100%);
+      position: relative;
+      animation: y2kBgShift 10s ease-in-out infinite alternate;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 1;
+      opacity: 0.45;
+      background:
+        radial-gradient(circle at 25% 15%, rgba(255, 255, 255, 0.45) 0 2px, transparent 3px),
+        radial-gradient(circle at 75% 35%, rgba(255, 255, 255, 0.35) 0 2px, transparent 3px),
+        radial-gradient(circle at 45% 80%, rgba(255, 255, 255, 0.32) 0 1.5px, transparent 2.5px);
+      background-size: 160px 160px, 200px 200px, 180px 180px;
+      animation: twinkleGrid 7s linear infinite;
+    }
+
+    @keyframes y2kBgShift {
+      from {
+        filter: saturate(1) hue-rotate(0deg);
+      }
+      to {
+        filter: saturate(1.15) hue-rotate(12deg);
+      }
+    }
+
+    @keyframes twinkleGrid {
+      from {
+        transform: translateY(0);
+      }
+      to {
+        transform: translateY(-24px);
+      }
+    }
+
+    .heart-layer,
+    .sparkle-layer,
+    .sticker-layer,
+    .cursor-layer {
+      pointer-events: none;
+      position: fixed;
+      inset: 0;
+      overflow: hidden;
+      z-index: 0;
+    }
+
+    .heart-layer,
+    .sparkle-layer {
+      z-index: 0;
+    }
+
+    .sticker-layer {
+      z-index: 4;
+    }
+
+    .cursor-layer {
+      z-index: 9;
+    }
+
+    .floating-heart {
+      position: absolute;
+      bottom: -40px;
+      font-size: clamp(14px, 2vw, 22px);
+      opacity: 0.5;
+      animation: floatUp linear forwards;
+      filter: drop-shadow(0 2px 8px rgba(255, 77, 184, 0.35));
+    }
+
+    @keyframes floatUp {
+      from {
+        transform: translateY(0) scale(0.95) rotate(0deg);
+        opacity: 0;
+      }
+      20% {
+        opacity: 0.65;
+      }
+      to {
+        transform: translateY(-120vh) scale(1.15) rotate(18deg);
+        opacity: 0;
+      }
+    }
+
+    .sticker {
+      position: absolute;
+      top: var(--top, 50%);
+      left: 0;
+      transform: translateX(-20vw);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      white-space: nowrap;
+      min-width: 44px;
+      min-height: 44px;
+      padding: 8px 14px;
+      border-radius: 999px;
+      font-size: var(--font-size, 18px);
+      font-weight: 600;
+      color: #fff;
+      border: 1px solid rgba(255, 255, 255, 0.75);
+      background:
+        linear-gradient(180deg, rgba(255, 255, 255, 0.65), rgba(255, 255, 255, 0.1) 38%),
+        linear-gradient(135deg, rgba(255, 119, 200, 0.95), rgba(228, 181, 255, 0.95));
+      box-shadow:
+        0 8px 22px rgba(255, 77, 184, 0.38),
+        inset 0 1px 2px rgba(255, 255, 255, 0.65);
+      text-shadow: 0 1px 4px rgba(122, 29, 98, 0.65);
+      animation: stickerFly var(--dur, 11s) linear forwards;
+      z-index: 1;
+      opacity: 0.9;
+    }
+
+    @keyframes stickerFly {
+      from {
+        transform: translate3d(var(--x-start, -25vw), 0, 0) rotate(var(--rot-start, -8deg)) scale(0.88);
+      }
+      45% {
+        transform: translate3d(var(--x-mid, 45vw), var(--drift, -16px), 0) rotate(0deg) scale(1);
+      }
+      to {
+        transform: translate3d(var(--x-end, 120vw), calc(var(--drift, -16px) * -1), 0) rotate(var(--rot-end, 10deg)) scale(1.08);
+        opacity: 0;
+      }
+    }
+
+    .cursor-glitter {
+      position: fixed;
+      left: 0;
+      top: 0;
+      pointer-events: none;
+      z-index: 7;
+      font-size: var(--size, 14px);
+      opacity: 0;
+      transform: translate(-50%, -50%);
+      filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.95));
+      animation: cursorBurst var(--dur, 760ms) ease-out forwards;
+    }
+
+    .cursor-wand {
+      position: fixed;
+      left: 0;
+      top: 0;
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      transform: translate(-50%, -50%);
+      background:
+        radial-gradient(circle at 35% 30%, rgba(255, 255, 255, 0.95) 0 24%, rgba(255, 255, 255, 0) 60%),
+        radial-gradient(circle, rgba(255, 77, 184, 0.65), rgba(228, 181, 255, 0.15));
+      box-shadow: 0 0 14px rgba(255, 119, 200, 0.75), 0 0 26px rgba(228, 181, 255, 0.7);
+      pointer-events: none;
+      z-index: 10;
+      opacity: 0;
+      transition: opacity 120ms ease;
+    }
+
+    @keyframes cursorBurst {
+      from {
+        opacity: 1;
+        transform: translate(-50%, -50%) translate(0, 0) scale(1) rotate(0deg);
+      }
+      to {
+        opacity: 0;
+        transform: translate(-50%, -50%) translate(var(--dx, 0), var(--dy, -22px)) scale(0.35) rotate(var(--spin, 120deg));
+      }
+    }
+
+    .quiz-app {
+      width: min(760px, 100%);
+      position: relative;
+      z-index: 3;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 18px;
+    }
+
+    .title-wrap {
+      text-align: center;
+      position: relative;
+      padding: 8px 16px;
+      animation: titlePulse 2.6s ease-in-out infinite;
+    }
+
+    @keyframes titlePulse {
+      0%, 100% {
+        transform: scale(1);
+      }
+      50% {
+        transform: scale(1.02);
+      }
+    }
+
+    .title {
+      font-size: clamp(1.8rem, 5vw, 3rem);
+      color: #ffffff;
+      text-shadow:
+        0 2px 0 #ff4db8,
+        0 0 16px rgba(255, 179, 230, 0.8),
+        0 0 35px rgba(228, 181, 255, 0.8);
+      letter-spacing: 0.03em;
+      animation: blinkGlow 1.9s steps(2, end) infinite;
+    }
+
+    @keyframes blinkGlow {
+      0%, 67%, 100% {
+        filter: brightness(1);
+      }
+      68%, 72% {
+        filter: brightness(1.35);
+      }
+    }
+
+    .subtitle {
+      margin-top: 8px;
+      font-size: clamp(0.96rem, 2.6vw, 1.2rem);
+      color: #fff8ff;
+      text-shadow: 0 1px 8px rgba(136, 47, 111, 0.65);
+    }
+
+    .title-sparkle {
+      position: absolute;
+      font-size: clamp(14px, 2.3vw, 22px);
+      animation: sparkleBlink 1.8s ease-in-out infinite;
+    }
+
+    .title-sparkle.s1 { top: -4px; left: -6px; animation-delay: 0s; }
+    .title-sparkle.s2 { top: 5px; right: -2px; animation-delay: 0.4s; }
+    .title-sparkle.s3 { bottom: -2px; left: 14%; animation-delay: 0.8s; }
+    .title-sparkle.s4 { bottom: 6px; right: 18%; animation-delay: 1.1s; }
+
+    @keyframes sparkleBlink {
+      0%, 100% { transform: scale(0.8) rotate(0deg); opacity: 0.45; }
+      50% { transform: scale(1.2) rotate(15deg); opacity: 1; }
+    }
+
+    .quiz-card {
+      width: 100%;
+      background: var(--card-bg);
+      border-radius: var(--radius-lg);
+      padding: clamp(18px, 4.5vw, 34px);
+      box-shadow: var(--shadow-soft), var(--glow);
+      border: 2px solid rgba(255, 255, 255, 0.75);
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
+      transition: transform var(--ease), opacity var(--ease);
+      position: relative;
+      overflow: hidden;
+      min-height: 420px;
+      animation: cardFloat 3.8s ease-in-out infinite;
+    }
+
+    .quiz-card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        130deg,
+        rgba(255, 255, 255, 0.55) 0%,
+        rgba(255, 255, 255, 0.05) 40%,
+        rgba(255, 255, 255, 0.35) 100%
+      );
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .quiz-card::after {
+      content: "";
+      position: absolute;
+      width: 170%;
+      height: 45%;
+      left: -35%;
+      top: -45%;
+      background: linear-gradient(95deg, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.75), rgba(255, 255, 255, 0));
+      transform: rotate(10deg);
+      animation: glossSweep 4.8s ease-in-out infinite;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    @keyframes glossSweep {
+      0%, 100% {
+        top: -55%;
+        opacity: 0.12;
+      }
+      45% {
+        top: 105%;
+        opacity: 0.5;
+      }
+      60% {
+        opacity: 0.1;
+      }
+    }
+
+    @keyframes cardFloat {
+      0%, 100% {
+        transform: translateY(0px);
+      }
+      50% {
+        transform: translateY(-4px);
+      }
+    }
+
+    .card-content {
+      position: relative;
+      z-index: 1;
+      transition: opacity var(--ease), transform var(--ease);
+    }
+
+    .card-content.fade-out {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+
+    .progress {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 12px;
+    }
+
+    .progress-label {
+      font-size: 0.95rem;
+      color: #a23f8a;
+    }
+
+    .bar {
+      flex: 1;
+      height: 10px;
+      background: rgba(255, 255, 255, 0.75);
+      border-radius: 999px;
+      overflow: hidden;
+      box-shadow: inset 0 0 8px rgba(255, 77, 184, 0.2);
+    }
+
+    .bar-fill {
+      height: 100%;
+      width: 0;
+      border-radius: inherit;
+      background: linear-gradient(90deg, var(--pink-1), var(--pink-4), var(--purple-1));
+      transition: width 280ms ease;
+    }
+
+    .question {
+      font-size: clamp(1.15rem, 3.4vw, 1.55rem);
+      line-height: 1.4;
+      margin: 16px 0 18px;
+      color: #7e2a65;
+      text-shadow: 0 1px 0 #fff;
+    }
+
+    .answers {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 12px;
+    }
+
+    .answer-btn,
+    .restart-btn,
+    .share-btn {
+      appearance: none;
+      border: 0;
+      cursor: pointer;
+      font: inherit;
+      border-radius: 999px;
+      color: #ffffff;
+      padding: 13px 18px;
+      text-align: left;
+      transition: transform var(--ease), box-shadow var(--ease), filter var(--ease);
+      background:
+        linear-gradient(180deg, rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0) 42%),
+        linear-gradient(135deg, var(--pink-1), var(--pink-4) 45%, #cd7cff 100%);
+      box-shadow: var(--shadow-btn), inset 0 1px 2px rgba(255, 255, 255, 0.55);
+      text-shadow: 0 1px 2px rgba(112, 31, 92, 0.4);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .answer-btn::after,
+    .restart-btn::after,
+    .share-btn::after {
+      content: "";
+      position: absolute;
+      inset: -30% auto -30% -100%;
+      width: 60%;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.65), transparent);
+      transform: skewX(-24deg);
+      transition: left 460ms ease;
+    }
+
+    .answer-btn:hover,
+    .restart-btn:hover,
+    .share-btn:hover {
+      transform: translateY(-3px) scale(1.01);
+      box-shadow: 0 10px 22px rgba(255, 77, 184, 0.35), inset 0 1px 2px rgba(255, 255, 255, 0.55);
+      filter: saturate(1.08);
+    }
+
+    .answer-btn:hover::after,
+    .restart-btn:hover::after,
+    .share-btn:hover::after {
+      left: 145%;
+    }
+
+    .answer-btn:active,
+    .restart-btn:active,
+    .share-btn:active {
+      transform: translateY(0) scale(0.98);
+    }
+
+    .result-wrap {
+      text-align: center;
+      display: grid;
+      gap: 14px;
+      justify-items: center;
+      animation: popIn 340ms ease;
+    }
+
+    @keyframes popIn {
+      from { opacity: 0; transform: scale(0.9); }
+      to { opacity: 1; transform: scale(1); }
+    }
+
+    .result-title {
+      font-size: clamp(1.3rem, 4vw, 2rem);
+      color: #8a2d6f;
+      text-shadow: 0 1px 0 #fff;
+    }
+
+    .result-subtitle {
+      font-size: clamp(1rem, 3vw, 1.35rem);
+      color: #b4398f;
+    }
+
+    .girl-photo {
+      width: min(260px, 72vw);
+      aspect-ratio: 1 / 1;
+      object-fit: cover;
+      border-radius: 24px;
+      border: 4px solid rgba(255, 255, 255, 0.95);
+      box-shadow: 0 14px 26px rgba(255, 77, 184, 0.3);
+      background: linear-gradient(135deg, #ffd6f5, #e4b5ff);
+    }
+
+    .result-description {
+      font-size: 1rem;
+      line-height: 1.5;
+      max-width: 62ch;
+      color: #7f2f66;
+      background: rgba(255, 255, 255, 0.6);
+      border-radius: 14px;
+      padding: 12px 14px;
+    }
+
+    .restart-btn {
+      min-width: min(320px, 100%);
+      text-align: center;
+      margin-top: 6px;
+    }
+
+    .result-actions {
+      width: min(360px, 100%);
+      display: grid;
+      gap: 10px;
+    }
+
+    .share-btn {
+      text-align: center;
+      min-width: min(320px, 100%);
+    }
+
+    .girl-vibe {
+      font-size: 0.98rem;
+      line-height: 1.45;
+      max-width: 62ch;
+      color: #7f2f66;
+      background: rgba(255, 255, 255, 0.72);
+      border-radius: 14px;
+      padding: 12px 14px;
+      border: 1px solid rgba(255, 179, 230, 0.85);
+    }
+
+    .confetti-layer {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      overflow: hidden;
+      z-index: 5;
+    }
+
+    .confetti {
+      position: absolute;
+      top: -10px;
+      width: 10px;
+      height: 16px;
+      opacity: 0.92;
+      animation: confettiFall linear forwards;
+    }
+
+    @keyframes confettiFall {
+      to {
+        transform: translate3d(var(--dx), 110vh, 0) rotate(760deg);
+        opacity: 0.3;
+      }
+    }
+
+    @media (max-width: 640px) {
+      body {
+        padding: 16px;
+      }
+      .quiz-card {
+        min-height: 440px;
+        border-radius: 24px;
+      }
+      .answer-btn {
+        padding: 12px 14px;
+      }
+    }
+
+    @media (pointer: coarse) {
+      .cursor-wand {
+        display: none;
+      }
+    }
+
+    .title {
+      cursor: pointer;
+    }
+
+    /* Secret gallery modal */
+    .secret-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      z-index: 200;
+      background: rgba(106, 27, 84, 0.55);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      overflow-y: auto;
+      padding: 32px 16px;
+      animation: fadeInOverlay 0.3s ease;
+    }
+    .secret-overlay.visible { display: flex; flex-wrap: wrap; justify-content: center; align-content: start; gap: 20px; }
+    @keyframes fadeInOverlay { from { opacity: 0; } to { opacity: 1; } }
+
+    .secret-close {
+      position: fixed;
+      top: 16px;
+      right: 20px;
+      z-index: 210;
+      background: var(--card-bg);
+      border: none;
+      font-size: 22px;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      cursor: pointer;
+      box-shadow: var(--shadow-soft);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .secret-heading {
+      width: 100%;
+      text-align: center;
+      font-size: clamp(22px, 4vw, 32px);
+      color: var(--white);
+      text-shadow: 0 2px 12px rgba(255, 77, 184, 0.6);
+      margin-bottom: 8px;
+    }
+
+    .secret-card {
+      background: var(--card-bg);
+      border-radius: var(--radius-md);
+      box-shadow: var(--shadow-soft);
+      padding: 16px;
+      width: 200px;
+      text-align: center;
+      transition: transform 0.2s;
+    }
+    .secret-card:hover { transform: translateY(-4px) scale(1.03); }
+
+    .secret-card img {
+      width: 120px;
+      height: 120px;
+      object-fit: cover;
+      border-radius: 50%;
+      margin-bottom: 10px;
+      border: 3px solid var(--pink-2);
+    }
+    .secret-card .sc-name {
+      font-weight: 600;
+      font-size: 15px;
+      margin-bottom: 4px;
+    }
+    .secret-card .sc-group {
+      font-size: 12px;
+      color: var(--pink-4);
+    }
+    .secret-card .sc-vibe {
+      font-size: 12px;
+      margin-top: 6px;
+      line-height: 1.35;
+      opacity: 0.85;
+    }
+  </style>
+</head>
+<body>
+  <div class="heart-layer" id="heartLayer"></div>
+  <div class="sparkle-layer" id="sparkleLayer"></div>
+  <div class="sticker-layer" id="stickerLayer"></div>
+  <div class="cursor-layer" id="cursorLayer"></div>
+  <div class="cursor-wand" id="cursorWand"></div>
+  <div class="confetti-layer" id="confettiLayer"></div>
+
+  <main class="quiz-app">
+    <header class="title-wrap">
+      <span class="title-sparkle s1">✨</span>
+      <span class="title-sparkle s2">💖</span>
+      <span class="title-sparkle s3">✨</span>
+      <span class="title-sparkle s4">💫</span>
+      <h1 class="title">Kto ty iz devochek QA-otdela? 💐</h1>
+      <p class="subtitle">Специальный квиз к 8 Марта: выбери ответы и узнай, на кого из команды ты похож(а) 💕</p>
+    </header>
+
+    <section class="quiz-card">
+      <div class="card-content" id="cardContent"></div>
+    </section>
+
+  </main>
+
+  <div class="secret-overlay" id="secretOverlay"></div>
+
+  <script>
+    /* =========================
+       DATA
+       - Добавляйте новых участниц в groups.<group>.girls
+       - У каждой участницы есть поле vibe — подправьте его под реальную коллегу
+       - Картинки лежат в папке qirls, пример: "qirls/Имя Фамилия.jpg"
+    ========================= */
+    const groups = {
+      autoQueen: {
+        title: "Auto Queen 🤖",
+        description: "Ты автоматизируешь всё, что движется. Скрипты, пайплайны, фреймворки — твоя стихия.",
+        score: 0,
+        girls: [
+          {
+            name: "Даша Аграновская",
+            img: "qirls/Даша Аграновская.jpg",
+            vibe: "Пишет автотесты так, что они работают надёжнее самого приложения. Если что-то можно автоматизировать — уже автоматизировано.",
+            galleryDesc: "Королева автотестов и главная по зелёным пайплайнам. Если тесты падают — Даша уже знает почему, ещё до того как ты открыл логи. Энергия, скорость и чувство юмора — всё при ней."
+          },
+          {
+            name: "Маша Лещинская",
+            img: "qirls/Маша Лещинская.jpeg",
+            vibe: "Строит фреймворки и пайплайны, балансируя скорость и качество. Автоматизация — не задача, а образ жизни.",
+            galleryDesc: "Архитектор фреймворков и человек-пайплайн. Если что-то можно автоматизировать — это уже в её бэклоге. Спокойно балансирует между кодом и хаосом, превращая второе в первое."
+          },
+          {
+            name: "Лена Подберезная",
+            img: "qirls/Лена Подберезная.jpg",
+            vibe: "Превращает хаос ручных проверок в элегантные автотесты. Структурирует всё, к чему прикасается.",
+            galleryDesc: "Та самая, что превращает ручной хаос в элегантный код. Структурность — её суперсила: после Лены всё разложено по полочкам, а тесты работают как швейцарские часы."
+          }
+        ]
+      },
+      teamLead: {
+        title: "QA Lead 👑",
+        description: "Ты ведёшь команду за собой и всегда выполняешь работу на высшем уровне.",
+        score: 0,
+        girls: [
+          {
+            name: "Таня Краюшкина",
+            img: "qirls/Таня Краюшкина.jpg",
+            vibe: "Системный подход ко всему: чёткий план, понятные шаги и мысль всегда на шаг вперёд. Настоящий лид.",
+            galleryDesc: "Мозговой центр и главный стратег QA. Видит на три шага вперёд, держит команду в тонусе и при этом умудряется оставаться самым спокойным человеком в комнате. Настоящий лидер."
+          },
+          {
+            name: "Даша Николаева",
+            img: "qirls/Даша Николаева.jpeg",
+            vibe: "Держит высокую планку качества и ведёт процессы так, что команда работает как часы.",
+            galleryDesc: "Планка качества у Даши — где-то на уровне стратосферы. Процессы при ней работают как часы, а команда чувствует себя уверенно. Умеет мотивировать одним взглядом."
+          },
+          {
+            name: "Лена Здоровцова",
+            img: "qirls/Лена Здоровцова.jpeg",
+            vibe: "Берёт ответственность на себя, креативно решает проблемы и всегда доводит дело до блестящего результата.",
+            galleryDesc: "Человек, который берёт ответственность не потому что надо, а потому что может. Креативные решения, блестящие результаты и суперспособность — делать невозможное возможным."
+          }
+        ]
+      },
+      qaVeteran: {
+        title: "QA Legend 🏆",
+        description: "Ты — живая энциклопедия тестирования. Опыт, мудрость и спокойствие — твои суперсилы.",
+        score: 0,
+        girls: [
+          {
+            name: "Даша Чаусова",
+            img: "qirls/Даша Чаусова.png",
+            vibe: "Видела всё: от водопада до CI/CD. Чётко расставляет приоритеты и знает, где искать проблему.",
+            galleryDesc: "Живая легенда QA. Видела всё — от водопада до CI/CD — и помнит каждый баг по имени. Когда все паникуют, Даша спокойно говорит: «Я знаю, где копать». И всегда оказывается права."
+          },
+          {
+            name: "Аня Демидова",
+            img: "qirls/Аня Демидова.jpg",
+            vibe: "Спокойствие и глубокий опыт — её козыри. В любом дедлайне знает, что делать, и помогает команде не терять фокус.",
+            galleryDesc: "Дзен-мастер тестирования. В любом дедлайне излучает спокойствие и точно знает, что делать. Её глубокий опыт — это тот якорь, который держит команду на плаву в любой шторм."
+          }
+        ]
+      },
+      levelUp: {
+        title: "Level Up 🚀",
+        description: "Ты постоянно растёшь, учишься и пробуешь новое. Развитие — твой главный драйвер.",
+        score: 0,
+        girls: [
+          {
+            name: "Полина Попова",
+            img: "qirls/Полина Попова.jpeg",
+            vibe: "Не останавливается на достигнутом: изучает новые инструменты, подходы и всегда в поиске лучшего решения.",
+            galleryDesc: "Вечный двигатель роста. Пока другие думают «и так сойдёт», Полина уже нашла три новых инструмента, сравнила их и внедрила лучший. Её энергия заразительна — рядом с ней хочется учиться."
+          },
+          {
+            name: "Наташа Савина",
+            img: "qirls/Наташа Савина.jpg",
+            vibe: "Быстро осваивает новое, глубоко копает в каждую тему и делится знаниями с командой.",
+            galleryDesc: "Быстрее всех осваивает новое и копает глубже всех. Если Наташа взялась за тему — жди подробный разбор и шеринг знаний на всю команду. Генератор экспертизы."
+          },
+          {
+            name: "Катя Шереметова",
+            img: "qirls/Катя Шереметова.jpeg",
+            vibe: "Внимательна к деталям и постоянно прокачивает навыки. Каждый спринт — новый уровень.",
+            galleryDesc: "Глаз-алмаз: замечает то, что другие пропускают. Каждый спринт для неё — новый уровень, каждый баг — personal challenge. Тихая сила, которая делает продукт лучше."
+          },
+          {
+            name: "Лера Потемкина",
+            img: "qirls/Лера Потемкина.png",
+            vibe: "Всегда в курсе трендов, пробует свежие подходы и не боится выходить из зоны комфорта.",
+            galleryDesc: "Трендсеттер QA-отдела. Первая узнаёт о новых подходах, первая пробует, первая делится. Зона комфорта? Не слышала. Смелость и любопытство — её главное оружие."
+          }
+        ]
+      },
+      rockSolid: {
+        title: "Rock Solid 💎",
+        description: "Ты — надёжная опора команды. Стабильность, качество и спокойная уверенность.",
+        score: 0,
+        girls: [
+          {
+            name: "Аня Ковалева",
+            img: "qirls/Аня Ковалева.jpg",
+            vibe: "На неё можно положиться в любой ситуации: стабильно, качественно, без лишнего шума.",
+            galleryDesc: "Скала, на которую можно опереться. Без лишнего шума делает так, что всё работает. Когда Аня на проекте — можно спать спокойно: качество гарантировано."
+          },
+          {
+            name: "Катя Обухова",
+            img: "qirls/Катя Обухова.jpg",
+            vibe: "Мягко, но уверенно доводит задачу до конца, сохраняя тёплую атмосферу в команде.",
+            galleryDesc: "Сочетание мягкости и стальной воли. Катя создаёт вокруг себя тёплую атмосферу, но при этом каждая задача доводится до идеала. Человек, с которым хочется работать в одной команде."
+          },
+          {
+            name: "Юля Какулия",
+            img: "qirls/Юля Какулия.jpeg",
+            vibe: "Классный и стабильный QA: всегда в ресурсе, всегда с результатом, всегда можно рассчитывать.",
+            galleryDesc: "Стабильность уровня «бог». Всегда в ресурсе, всегда с результатом, всегда можно рассчитывать. Юля — тот человек, который тихо делает команду сильнее каждый день."
+          }
+        ]
+      }
+    };
+
+    const questions = [
+      {
+        text: "Разработчик пишет: «У меня всё работает». Твоя реакция?",
+        answers: [
+          { text: "«Сейчас напишу автотест — и посмотрим»", group: "autoQueen" },
+          { text: "«Давай разберёмся вместе, я подключу команду»", group: "teamLead" },
+          { text: "«Ага, классика. Сейчас спокойно перепроверю»", group: "qaVeteran" },
+          { text: "«О, интересно! Пойду копать, почему так»", group: "levelUp" },
+          { text: "«Ок, перепроверю на чистом стенде ещё раз»", group: "rockSolid" }
+        ]
+      },
+      {
+        text: "На демо нашли критичный баг за 5 минут до конца. Что делаешь?",
+        answers: [
+          { text: "Проверяю, почему автотесты его не поймали", group: "autoQueen" },
+          { text: "Беру ситуацию на себя и координирую команду", group: "teamLead" },
+          { text: "Спокойно оцениваю риск — видел(а) и не такое", group: "qaVeteran" },
+          { text: "Изучаю причину: хочу понять, как это вообще возможно", group: "levelUp" },
+          { text: "Фиксирую, описываю, передаю — без паники", group: "rockSolid" }
+        ]
+      },
+      {
+        text: "Как выглядит твоя идеальная пятница в QA?",
+        answers: [
+          { text: "Зелёный пайплайн, все автотесты прошли", group: "autoQueen" },
+          { text: "Команда довольна, процессы работают как часы", group: "teamLead" },
+          { text: "Спокойный день, все задачи закрыты без сюрпризов", group: "qaVeteran" },
+          { text: "Узнал(а) что-то новое и попробовал(а) на практике", group: "levelUp" },
+          { text: "Прогнал(а) smoke, закрыл(а) задачи и ушёл/ушла вовремя", group: "rockSolid" }
+        ]
+      },
+      {
+        text: "Команда говорит: «Да там мелочь». Ты?",
+        answers: [
+          { text: "«Добавлю проверку в автотесты, чтобы не повторилось»", group: "autoQueen" },
+          { text: "«Ребят, давайте всё-таки оценим влияние на пользователей»", group: "teamLead" },
+          { text: "«По опыту, такие мелочи потом стреляют на проде»", group: "qaVeteran" },
+          { text: "«Интересно, а почему это вообще возникло? Пойду разберусь»", group: "levelUp" },
+          { text: "«С улыбкой прошу поправить — и добавляю в регрессию»", group: "rockSolid" }
+        ]
+      },
+      {
+        text: "Как ты обычно оформляешь баг-репорт?",
+        answers: [
+          { text: "Прикладываю лог автотеста и стек-трейс", group: "autoQueen" },
+          { text: "С приоритетом, влиянием на бизнес и планом действий", group: "teamLead" },
+          { text: "Кратко и по делу — опыт подсказывает, что важно", group: "qaVeteran" },
+          { text: "Подробно разбираю причину, чтобы самому/самой разобраться", group: "levelUp" },
+          { text: "Чётко по шаблону: шаги, expected/actual, скриншот", group: "rockSolid" }
+        ]
+      },
+      {
+        text: "На ретро ты чаще говоришь...",
+        answers: [
+          { text: "«Нужно автоматизировать этот флоу»", group: "autoQueen" },
+          { text: "«Давайте улучшим процесс в команде»", group: "teamLead" },
+          { text: "«Мы уже проходили похожее — вот что сработало»", group: "qaVeteran" },
+          { text: "«Я тут нашёл/нашла классный инструмент, давайте попробуем»", group: "levelUp" },
+          { text: "«Давайте меньше стресса и больше стабильности»", group: "rockSolid" }
+        ]
+      },
+      {
+        text: "Перед выкладкой ты в первую очередь...",
+        answers: [
+          { text: "Запускаю полный прогон автотестов", group: "autoQueen" },
+          { text: "Сверяю статус с командой и даю go/no-go", group: "teamLead" },
+          { text: "Проверяю критичный путь — знаю, где обычно ломается", group: "qaVeteran" },
+          { text: "Смотрю, что нового в этом релизе — интересно же", group: "levelUp" },
+          { text: "Прохожу чек-лист и проверяю покрытие", group: "rockSolid" }
+        ]
+      },
+      {
+        text: "Какой у тебя внутренний QA-мотто?",
+        answers: [
+          { text: "«Если можно автоматизировать — уже автоматизировано»", group: "autoQueen" },
+          { text: "«Команда сильна настолько, насколько силён процесс»", group: "teamLead" },
+          { text: "«Опыт не пропьёшь — и баги тоже»", group: "qaVeteran" },
+          { text: "«Каждый день — шанс узнать что-то новое»", group: "levelUp" },
+          { text: "«Стабильность — признак мастерства»", group: "rockSolid" }
+        ]
+      },
+      {
+        text: "Ночной алерт: после выкладки что-то пошло не так. Твой первый шаг?",
+        answers: [
+          { text: "Смотрю логи CI — что упало в пайплайне?", group: "autoQueen" },
+          { text: "Собираю war-room и распределяю задачи", group: "teamLead" },
+          { text: "Спокойно анализирую — знаю, с чего начать", group: "qaVeteran" },
+          { text: "Изучаю, что именно изменилось — хочу понять корень", group: "levelUp" },
+          { text: "Фиксирую проблему и спокойно передаю дежурным", group: "rockSolid" }
+        ]
+      },
+      {
+        text: "Тебе дали фичу почти без ТЗ. Что делаешь?",
+        answers: [
+          { text: "Пишу тесты по коду — API и контракты расскажут правду", group: "autoQueen" },
+          { text: "Иду к PM и разрабу — выстраиваю понимание в команде", group: "teamLead" },
+          { text: "По опыту знаю, что проверить — ТЗ не так уж и нужно", group: "qaVeteran" },
+          { text: "Отличный повод изучить фичу с нуля и разобраться глубже", group: "levelUp" },
+          { text: "Составляю свой чек-лист и методично проверяю", group: "rockSolid" }
+        ]
+      }
+    ];
+
+    /* =========================
+       QUIZ ENGINE
+    ========================= */
+    let currentQuestion = 0;
+    const appState = {
+      winnerKey: null,
+      winnerGirl: null
+    };
+
+    function resetScores() {
+      Object.keys(groups).forEach((key) => {
+        groups[key].score = 0;
+      });
+    }
+
+    function selectAnswer(groupKey) {
+      if (!groups[groupKey]) return;
+      groups[groupKey].score += 1;
+      currentQuestion += 1;
+
+      if (currentQuestion >= questions.length) {
+        computeResult();
+        renderResult();
+        launchConfetti();
+        return;
+      }
+
+      renderQuestion(true);
+    }
+
+    function computeResult() {
+      const maxScore = Math.max(...Object.values(groups).map((g) => g.score));
+      const winners = Object.entries(groups).filter(([, group]) => group.score === maxScore);
+      const [winnerKey, winnerGroup] = winners[Math.floor(Math.random() * winners.length)];
+      const randomGirl = winnerGroup.girls[Math.floor(Math.random() * winnerGroup.girls.length)];
+
+      appState.winnerKey = winnerKey;
+      appState.winnerGirl = randomGirl;
+    }
+
+    function restartQuiz() {
+      currentQuestion = 0;
+      appState.winnerKey = null;
+      appState.winnerGirl = null;
+      resetScores();
+      renderQuestion();
+    }
+
+    /* =========================
+       UI RENDERING
+    ========================= */
+    const cardContent = document.getElementById("cardContent");
+    const heartLayer = document.getElementById("heartLayer");
+    const sparkleLayer = document.getElementById("sparkleLayer");
+    const stickerLayer = document.getElementById("stickerLayer");
+    const cursorLayer = document.getElementById("cursorLayer");
+    const cursorWand = document.getElementById("cursorWand");
+    const confettiLayer = document.getElementById("confettiLayer");
+    const SHARE_URL = "https://google.com";
+
+    function getShareText() {
+      const winnerGroup = groups[appState.winnerKey];
+      const winnerGirl = appState.winnerGirl;
+      if (!winnerGroup || !winnerGirl) return "";
+      return [
+        "Кто ты из девочек QA-отдела? 💐",
+        "Квиз к 8 Марта 💖",
+        `Мой результат: ${winnerGroup.title}`,
+        `Но конкретно я — ${winnerGirl.name}`,
+        winnerGroup.description,
+        winnerGirl.vibe || "",
+        `Ссылка: ${SHARE_URL}`
+      ].filter(Boolean).join("\n");
+    }
+
+    function drawRoundedRect(ctx, x, y, w, h, r) {
+      const radius = Math.min(r, w / 2, h / 2);
+      ctx.beginPath();
+      ctx.moveTo(x + radius, y);
+      ctx.lineTo(x + w - radius, y);
+      ctx.quadraticCurveTo(x + w, y, x + w, y + radius);
+      ctx.lineTo(x + w, y + h - radius);
+      ctx.quadraticCurveTo(x + w, y + h, x + w - radius, y + h);
+      ctx.lineTo(x + radius, y + h);
+      ctx.quadraticCurveTo(x, y + h, x, y + h - radius);
+      ctx.lineTo(x, y + radius);
+      ctx.quadraticCurveTo(x, y, x + radius, y);
+      ctx.closePath();
+    }
+
+    function drawWrappedText(ctx, text, x, y, maxWidth, lineHeight, maxLines = 5) {
+      const words = String(text || "").split(/\s+/).filter(Boolean);
+      const lines = [];
+      let line = "";
+      for (let i = 0; i < words.length; i += 1) {
+        const testLine = line ? `${line} ${words[i]}` : words[i];
+        const width = ctx.measureText(testLine).width;
+        if (width <= maxWidth) {
+          line = testLine;
+        } else {
+          if (line) lines.push(line);
+          line = words[i];
+          if (lines.length >= maxLines - 1) break;
+        }
+      }
+      if (line && lines.length < maxLines) lines.push(line);
+
+      lines.forEach((ln, idx) => {
+        let output = ln;
+        if (idx === maxLines - 1 && words.length > 0) {
+          const consumed = lines.slice(0, idx).join(" ").split(" ").filter(Boolean).length + ln.split(" ").filter(Boolean).length;
+          if (consumed < words.length && !ln.endsWith("...")) {
+            output = `${ln.replace(/[.,;:!?]$/, "")}...`;
+          }
+        }
+        ctx.fillText(output, x, y + idx * lineHeight);
+      });
+
+      return y + lines.length * lineHeight;
+    }
+
+    function loadImage(src) {
+      return new Promise((resolve, reject) => {
+        const img = new Image();
+        img.onload = () => resolve(img);
+        img.onerror = () => reject(new Error(`Image not loaded: ${src}`));
+        img.src = src;
+      });
+    }
+
+    function canvasToBlob(canvas) {
+      return new Promise((resolve, reject) => {
+        canvas.toBlob((blob) => {
+          if (blob) resolve(blob);
+          else reject(new Error("Canvas conversion failed"));
+        }, "image/png");
+      });
+    }
+
+    function blobToDataUrl(blob) {
+      return new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.onload = () => resolve(reader.result);
+        reader.onerror = () => reject(new Error("Cannot convert blob to data URL"));
+        reader.readAsDataURL(blob);
+      });
+    }
+
+    async function createShareImageBlob() {
+      const winnerGroup = groups[appState.winnerKey];
+      const winnerGirl = appState.winnerGirl;
+      if (!winnerGroup || !winnerGirl) return null;
+
+      const width = 1200;
+      const height = 1500;
+      const canvas = document.createElement("canvas");
+      canvas.width = width;
+      canvas.height = height;
+      const ctx = canvas.getContext("2d");
+
+      const bgGradient = ctx.createLinearGradient(0, 0, width, height);
+      bgGradient.addColorStop(0, "#ffb3e6");
+      bgGradient.addColorStop(0.45, "#ffd6f5");
+      bgGradient.addColorStop(1, "#e4b5ff");
+      ctx.fillStyle = bgGradient;
+      ctx.fillRect(0, 0, width, height);
+
+      for (let i = 0; i < 46; i += 1) {
+        ctx.fillStyle = i % 2 ? "rgba(255,255,255,0.3)" : "rgba(255,77,184,0.15)";
+        ctx.beginPath();
+        ctx.arc(Math.random() * width, Math.random() * height, 2 + Math.random() * 6, 0, Math.PI * 2);
+        ctx.fill();
+      }
+
+      drawRoundedRect(ctx, 90, 120, width - 180, height - 230, 54);
+      ctx.fillStyle = "rgba(255,255,255,0.87)";
+      ctx.fill();
+      ctx.strokeStyle = "rgba(255,255,255,0.9)";
+      ctx.lineWidth = 4;
+      ctx.stroke();
+
+      const gloss = ctx.createLinearGradient(90, 120, width - 90, 780);
+      gloss.addColorStop(0, "rgba(255,255,255,0.62)");
+      gloss.addColorStop(1, "rgba(255,255,255,0.06)");
+      drawRoundedRect(ctx, 90, 120, width - 180, 620, 54);
+      ctx.fillStyle = gloss;
+      ctx.fill();
+
+      ctx.fillStyle = "#ff4db8";
+      ctx.font = "700 58px Fredoka, sans-serif";
+      ctx.fillText("Кто ты из девочек QA-отдела? ✨", 150, 230);
+
+      ctx.fillStyle = "#b4398f";
+      ctx.font = "600 36px Fredoka, sans-serif";
+      ctx.fillText("Праздничный квиз к 8 Марта 💖", 150, 285);
+
+      ctx.fillStyle = "#8a2d6f";
+      ctx.font = "600 52px Fredoka, sans-serif";
+      ctx.fillText(`Ты — ${winnerGroup.title}`, 150, 360);
+
+      ctx.fillStyle = "#b4398f";
+      ctx.font = "600 45px Fredoka, sans-serif";
+      ctx.fillText(`Но конкретно ты — ${winnerGirl.name}`, 150, 430);
+
+      ctx.fillStyle = "#7a2e64";
+      ctx.font = "500 34px Fredoka, sans-serif";
+      let y = drawWrappedText(ctx, winnerGroup.description, 150, 500, width - 300, 48, 4);
+      y = drawWrappedText(ctx, winnerGirl.vibe || "", 150, y + 24, width - 300, 46, 5);
+
+      const photoSize = 380;
+      const photoX = width / 2 - photoSize / 2;
+      const photoY = 860;
+
+      drawRoundedRect(ctx, photoX - 14, photoY - 14, photoSize + 28, photoSize + 28, 46);
+      ctx.fillStyle = "rgba(255,255,255,0.95)";
+      ctx.fill();
+
+      try {
+        const img = await loadImage(winnerGirl.img);
+        drawRoundedRect(ctx, photoX, photoY, photoSize, photoSize, 36);
+        ctx.save();
+        ctx.clip();
+        ctx.drawImage(img, photoX, photoY, photoSize, photoSize);
+        ctx.restore();
+      } catch (e) {
+        const fallback = ctx.createLinearGradient(photoX, photoY, photoX + photoSize, photoY + photoSize);
+        fallback.addColorStop(0, "#ff77c8");
+        fallback.addColorStop(1, "#e4b5ff");
+        drawRoundedRect(ctx, photoX, photoY, photoSize, photoSize, 36);
+        ctx.fillStyle = fallback;
+        ctx.fill();
+        ctx.fillStyle = "#fff";
+        ctx.font = "600 42px Fredoka, sans-serif";
+        ctx.fillText("💖 QA STAR", photoX + 70, photoY + photoSize / 2 + 10);
+      }
+
+      return canvasToBlob(canvas);
+    }
+
+    async function copyImageAndLink(blob, text) {
+      if (!(navigator.clipboard && window.ClipboardItem && window.isSecureContext)) {
+        return false;
+      }
+
+      try {
+        const dataUrl = await blobToDataUrl(blob);
+        const html = `<img src="${dataUrl}" alt="QA quiz result" style="max-width:100%;height:auto;" />`;
+        const item = new ClipboardItem({
+          "image/png": blob,
+          "text/plain": new Blob([text], { type: "text/plain" }),
+          "text/html": new Blob([html], { type: "text/html" })
+        });
+        await navigator.clipboard.write([item]);
+        return true;
+      } catch (e) {
+        return false;
+      }
+    }
+
+    async function copyTextFallback(text) {
+      if (navigator.clipboard && window.isSecureContext) {
+        await navigator.clipboard.writeText(text);
+        return;
+      }
+      const ta = document.createElement("textarea");
+      ta.value = text;
+      ta.setAttribute("readonly", "");
+      ta.style.position = "absolute";
+      ta.style.left = "-9999px";
+      document.body.appendChild(ta);
+      ta.select();
+      document.execCommand("copy");
+      ta.remove();
+    }
+
+    async function shareResult() {
+      const text = getShareText();
+      const winnerGroup = groups[appState.winnerKey];
+      const winnerGirl = appState.winnerGirl;
+      if (!text || !winnerGroup || !winnerGirl) return;
+
+      const shareBtn = document.getElementById("shareBtn");
+      const defaultLabel = "Поделиться результатом 💌";
+      if (shareBtn) shareBtn.textContent = "Готовлю картинку...";
+
+      try {
+        const blob = await createShareImageBlob();
+        if (!blob) throw new Error("Image blob not created");
+
+        const copied = await copyImageAndLink(blob, text);
+        if (copied) {
+          if (shareBtn) {
+            shareBtn.textContent = "Картинка + ссылка скопированы 💖";
+            setTimeout(() => {
+              shareBtn.textContent = defaultLabel;
+            }, 1900);
+          }
+          return;
+        }
+
+        if (navigator.share) {
+          const file = new File([blob], "qa-quiz-result.png", { type: "image/png" });
+          if (!navigator.canShare || navigator.canShare({ files: [file] })) {
+            await navigator.share({
+              title: "Кто ты из девочек QA-отдела? • К 8 Марта",
+              text,
+              url: SHARE_URL,
+              files: [file]
+            });
+            if (shareBtn) {
+              shareBtn.textContent = "Открыт share-диалог 💫";
+              setTimeout(() => {
+                shareBtn.textContent = defaultLabel;
+              }, 1600);
+            }
+            return;
+          }
+        }
+
+        await copyTextFallback(text);
+        if (shareBtn) {
+          shareBtn.textContent = "Скопирован текст + ссылка 💌";
+          setTimeout(() => {
+            shareBtn.textContent = defaultLabel;
+          }, 1800);
+        }
+      } catch (err) {
+        if (shareBtn) shareBtn.textContent = defaultLabel;
+      }
+    }
+
+    function renderQuestion(withTransition = false) {
+      const q = questions[currentQuestion];
+      if (!q) return;
+
+      const doRender = () => {
+        const progress = Math.round((currentQuestion / questions.length) * 100);
+        cardContent.innerHTML = `
+          <div class="progress">
+            <span class="progress-label">Вопрос ${currentQuestion + 1} / ${questions.length}</span>
+            <div class="bar"><div class="bar-fill" style="width:${progress}%"></div></div>
+          </div>
+          <h2 class="question">${q.text}</h2>
+          <div class="answers">
+            ${q.answers.map((answer) => `
+              <button class="answer-btn" data-group="${answer.group}">
+                ${answer.text}
+              </button>
+            `).join("")}
+          </div>
+        `;
+
+        const answerButtons = cardContent.querySelectorAll(".answer-btn");
+        answerButtons.forEach((btn) => {
+          btn.addEventListener("click", () => {
+            const { group } = btn.dataset;
+            selectAnswer(group);
+          });
+        });
+      };
+
+      if (withTransition) {
+        cardContent.classList.add("fade-out");
+        setTimeout(() => {
+          doRender();
+          cardContent.classList.remove("fade-out");
+        }, 180);
+      } else {
+        doRender();
+      }
+    }
+
+    function renderResult() {
+      const winnerGroup = groups[appState.winnerKey];
+      const winnerGirl = appState.winnerGirl;
+      if (!winnerGroup || !winnerGirl) return;
+
+      cardContent.classList.add("fade-out");
+      setTimeout(() => {
+        cardContent.innerHTML = `
+          <div class="result-wrap">
+            <h2 class="result-title">Ты — ${winnerGroup.title}</h2>
+            <p class="result-subtitle">Но конкретно ты — <strong>${winnerGirl.name}</strong> 💖</p>
+            <img class="girl-photo" src="${winnerGirl.img}" alt="${winnerGirl.name}" />
+            <p class="result-description">${winnerGroup.description}</p>
+            <p class="girl-vibe">${winnerGirl.vibe || "Добавьте персональное описание этой коллеги в поле vibe."}</p>
+            <div class="result-actions">
+              <button class="share-btn" id="shareBtn">Поделиться результатом 💌</button>
+              <button class="restart-btn" id="restartBtn">Пройти ещё раз ✨</button>
+            </div>
+          </div>
+        `;
+        cardContent.classList.remove("fade-out");
+
+        const img = cardContent.querySelector(".girl-photo");
+        img.addEventListener("error", () => {
+          // Фолбэк, если картинка не найдена: просто скрываем broken image.
+          img.style.display = "none";
+        });
+
+        document.getElementById("shareBtn").addEventListener("click", shareResult);
+        document.getElementById("restartBtn").addEventListener("click", restartQuiz);
+      }, 180);
+    }
+
+    function createFloatingHeart() {
+      const heart = document.createElement("span");
+      const symbols = ["💖", "💕", "💗", "✨", "💘"];
+      heart.className = "floating-heart";
+      heart.textContent = symbols[Math.floor(Math.random() * symbols.length)];
+      heart.style.left = `${Math.random() * 100}%`;
+      heart.style.animationDuration = `${6 + Math.random() * 5}s`;
+      heart.style.fontSize = `${14 + Math.random() * 18}px`;
+      heart.style.opacity = `${0.25 + Math.random() * 0.45}`;
+      heartLayer.appendChild(heart);
+
+      setTimeout(() => {
+        heart.remove();
+      }, 12000);
+    }
+
+    function createSparkle() {
+      const sparkle = document.createElement("span");
+      sparkle.textContent = Math.random() > 0.5 ? "✨" : "💫";
+      sparkle.style.position = "absolute";
+      sparkle.style.left = `${Math.random() * 100}%`;
+      sparkle.style.top = `${Math.random() * 100}%`;
+      sparkle.style.fontSize = `${8 + Math.random() * 16}px`;
+      sparkle.style.opacity = "0";
+      sparkle.style.filter = "drop-shadow(0 0 8px rgba(255,255,255,0.7))";
+      sparkle.style.animation = "sparkleBlink 1.2s ease-in-out forwards";
+      sparkleLayer.appendChild(sparkle);
+
+      setTimeout(() => sparkle.remove(), 1300);
+    }
+
+    function createFlyingSticker() {
+      const stickers = ["💖", "✨", "🎀", "🦋", "xoxo", "QA ANGEL", "BUG SLAYER", "CUTIE MODE"];
+      const sticker = document.createElement("span");
+      const leftToRight = Math.random() > 0.45;
+      sticker.className = "sticker";
+      sticker.textContent = stickers[Math.floor(Math.random() * stickers.length)];
+      sticker.style.setProperty("--top", `${8 + Math.random() * 78}%`);
+      sticker.style.setProperty("--font-size", `${14 + Math.random() * 8}px`);
+      sticker.style.setProperty("--dur", `${8.5 + Math.random() * 5}s`);
+      sticker.style.setProperty("--drift", `${-22 + Math.random() * 44}px`);
+      sticker.style.setProperty("--rot-start", `${-10 + Math.random() * 20}deg`);
+      sticker.style.setProperty("--rot-end", `${-12 + Math.random() * 24}deg`);
+
+      if (leftToRight) {
+        sticker.style.setProperty("--x-start", "-28vw");
+        sticker.style.setProperty("--x-mid", "45vw");
+        sticker.style.setProperty("--x-end", "120vw");
+      } else {
+        sticker.style.setProperty("--x-start", "120vw");
+        sticker.style.setProperty("--x-mid", "45vw");
+        sticker.style.setProperty("--x-end", "-30vw");
+      }
+
+      stickerLayer.appendChild(sticker);
+      setTimeout(() => sticker.remove(), 15000);
+    }
+
+    function spawnCursorGlitter(x, y, amount = 1) {
+      const symbols = ["✦", "✧", "✨", "💖"];
+      for (let i = 0; i < amount; i += 1) {
+        const glitter = document.createElement("span");
+        glitter.className = "cursor-glitter";
+        glitter.textContent = symbols[Math.floor(Math.random() * symbols.length)];
+        glitter.style.left = `${x + (Math.random() * 18 - 9)}px`;
+        glitter.style.top = `${y + (Math.random() * 18 - 9)}px`;
+        glitter.style.setProperty("--dx", `${Math.random() * 40 - 20}px`);
+        glitter.style.setProperty("--dy", `${Math.random() * 44 - 30}px`);
+        glitter.style.setProperty("--spin", `${Math.random() * 280 - 140}deg`);
+        glitter.style.setProperty("--size", `${10 + Math.random() * 11}px`);
+        glitter.style.setProperty("--dur", `${520 + Math.random() * 340}ms`);
+        cursorLayer.appendChild(glitter);
+        setTimeout(() => glitter.remove(), 900);
+      }
+    }
+
+    function initGlitterCursor() {
+      const finePointer = window.matchMedia("(pointer:fine)").matches;
+      if (!finePointer) return;
+
+      let lastMove = 0;
+      document.addEventListener("pointermove", (event) => {
+        cursorWand.style.opacity = "1";
+        cursorWand.style.left = `${event.clientX}px`;
+        cursorWand.style.top = `${event.clientY}px`;
+        const now = performance.now();
+        if (now - lastMove > 24) {
+          spawnCursorGlitter(event.clientX, event.clientY, 1);
+          lastMove = now;
+        }
+      });
+
+      document.addEventListener("pointerdown", (event) => {
+        spawnCursorGlitter(event.clientX, event.clientY, 8);
+      });
+
+      document.addEventListener("pointerleave", () => {
+        cursorWand.style.opacity = "0";
+      });
+    }
+
+    function launchConfetti() {
+      const pieces = 90;
+      const colors = ["#ff77c8", "#ffb3e6", "#ffd6f5", "#e4b5ff", "#ff4db8", "#ffffff"];
+
+      for (let i = 0; i < pieces; i += 1) {
+        const node = document.createElement("span");
+        node.className = "confetti";
+        node.style.left = `${Math.random() * 100}%`;
+        node.style.background = colors[Math.floor(Math.random() * colors.length)];
+        node.style.width = `${7 + Math.random() * 7}px`;
+        node.style.height = `${9 + Math.random() * 12}px`;
+        node.style.borderRadius = Math.random() > 0.55 ? "2px" : "999px";
+        node.style.animationDuration = `${1600 + Math.random() * 1400}ms`;
+        node.style.setProperty("--dx", `${-120 + Math.random() * 240}px`);
+        confettiLayer.appendChild(node);
+
+        setTimeout(() => node.remove(), 3400);
+      }
+    }
+
+    function initBackgroundEffects() {
+      setInterval(createFloatingHeart, 550);
+      setInterval(createSparkle, 420);
+      setInterval(createFlyingSticker, 1350);
+    }
+
+    /* Secret gallery */
+    document.querySelector(".title").addEventListener("click", () => {
+      const overlay = document.getElementById("secretOverlay");
+      if (overlay.classList.contains("visible")) {
+        overlay.classList.remove("visible");
+        return;
+      }
+      let html = '<button class="secret-close" id="secretClose">&times;</button>';
+      html += '<h2 class="secret-heading">All QA Girls 💖✨</h2>';
+      for (const key of Object.keys(groups)) {
+        const g = groups[key];
+        for (const girl of g.girls) {
+          html += `
+            <div class="secret-card">
+              <img src="${girl.img}" alt="${girl.name}" onerror="this.style.display='none'" />
+              <div class="sc-name">${girl.name}</div>
+              <div class="sc-vibe">${girl.galleryDesc || girl.vibe}</div>
+            </div>`;
+        }
+      }
+      overlay.innerHTML = html;
+      overlay.classList.add("visible");
+      document.getElementById("secretClose").addEventListener("click", () => {
+        overlay.classList.remove("visible");
+      });
+    });
+
+    restartQuiz();
+    initBackgroundEffects();
+    initGlitterCursor();
+  </script>
+</body>
+</html>
